@@ -8,7 +8,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 final class ArticleDTO
 {
     /**
-     * @SWG\Property(description="The unique identifier of the article.", example={1})
+     * @SWG\Property(readOnly=true, description="The unique identifier of the article.", example={1})
      */
     private $id;
 
