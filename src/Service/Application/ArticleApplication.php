@@ -36,9 +36,14 @@ final class ArticleApplication
         return $this->assembler->write($article);
     }
 
-    public function getList(): array
+    public function getList(int $page): array
     {
-        return $this->assembler->writeMultiple($this->repository->findAll());
+        return $this->assembler->writeMultiple(
+            iterator_to_array(
+                $this->repository->getList($page)
+                ->getCurrentPageResults()
+            )
+        );
     }
 
     public function save(ArticleDTO $articleDTO, Article $article): ArticleDTO

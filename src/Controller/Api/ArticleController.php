@@ -7,6 +7,7 @@ use App\Service\Application\ArticleApplication;
 use App\Service\DTO\ArticleDTO;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\Controller\FOSRestController;
+use FOS\RestBundle\Request\ParamFetcherInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -37,11 +38,14 @@ class ArticleController extends FOSRestController
 
     /**
      * @Route("/articles", name="article_get_list", methods={"GET"})
+     * @Rest\QueryParam(name="page", requirements="\d+", default=1)
      * @Rest\View(statusCode=200)
      */
-    public function getList()
+    public function getList(ParamFetcherInterface $paramFetcher)
     {
-        return $this->application->getList();
+        return $this->application->getList(
+            $paramFetcher->get('page')
+        );
     }
 
     /**
