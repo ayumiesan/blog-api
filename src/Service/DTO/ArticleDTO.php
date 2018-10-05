@@ -2,18 +2,24 @@
 
 namespace App\Service\DTO;
 
+use Swagger\Annotations as SWG;
 use Symfony\Component\Validator\Constraints as Assert;
 
 final class ArticleDTO
 {
+    /**
+     * @SWG\Property(description="The unique identifier of the article.", example={1})
+     */
     private $id;
 
     /**
+     * @SWG\Property(maxLength=255, description="The title of the article.", example={"Title of article"})
      * @Assert\NotBlank
      */
     private $title;
 
     /**
+     * @SWG\Property(type="text", description="The content of the article.", example={"Content of article"})
      * @Assert\NotBlank
      */
     private $content;
